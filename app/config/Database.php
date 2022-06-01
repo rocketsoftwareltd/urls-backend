@@ -98,4 +98,22 @@ class Database {
             return false;
         }
     }
+
+    public function validate($data, $options = []){
+
+        if(empty($data)){
+            return "Required field missing";
+        }else{
+
+            $sanitized_data = $this->safe_data($data);
+            if($options["max"] != null){
+                if(strlen($sanitized_data) > $options["max"]){
+                    $max_val =  $options["max"];
+                    return "Field value cannot be more than $max_val";
+                }
+            }
+        }
+
+    }
+
 }
