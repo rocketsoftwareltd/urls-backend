@@ -16,15 +16,31 @@ class Link extends Database{
 
     public function create(){ 
         if($this->isset != null){
-            $parameters = $_POST['submit'];
             $short_url = $this->short_url();
-            // $parameters = 
-            $response = Database::insert($this->table, $_POST['submit']);
-            if(!$response){
-               echo $response;
+
+            // check for short url duplicate
+            $result = Database::select($this->table,  "short_url", "short_url=$short_url");
+            
+            if($result->num_rows > 0){
+                $short_url = $this->short_url();
             }else{
-                Database::redirect("../../links.php?create=success");
+                $parameters = [
+                    "user_id"   => $_SESSION["user_id"],
+                    "url"       => $_POST['submit'],
+                    "short_url" => $short_url,
+                    "created_by"=> $_SESSION["user_id"]
+                ];
+                
+                
+                // $parameters = 
+                $response = Database::insert($this->table,  $parameters);
+                if(!$response){
+                   echo $response;
+                }else{
+                    Database::redirect("../../links.php?create=success");
+                }
             }
+
         }
     }
 
