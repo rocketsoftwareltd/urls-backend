@@ -48,7 +48,7 @@ class Database {
             if(!$result){
                 $this->connection->error;
             }else{
-                return $result->fetch_assoc();
+                return $result;
             }
         }
     }
