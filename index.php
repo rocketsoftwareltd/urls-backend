@@ -1,6 +1,7 @@
 <?php
     require_once "app/config/config.php";
     require_once "app/config/Database.php";
+    require "app/models/Admin.php";
     
     $parameters = [
         "first_name" => "Jethro",
