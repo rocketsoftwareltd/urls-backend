@@ -4,7 +4,7 @@ class Database {
     private $host = "localhost";
     private $username = "root";
     private $password = "";
-    private $db_name = "url-shortener";
+    private $db_name = "url_shortener";
     private $connection;
 
 
@@ -18,17 +18,21 @@ class Database {
 
     public function insert($table, $parameters = []){
         if($this->tableExist($table)){
+
             $array_keys = array_keys($parameters);
-            $colums = implode(", ", $array_keys);
+            $colums = "`".implode("`, `", $array_keys)."`";
             $values = "'".implode("', '", $parameters)."'";
 
             $sql = "INSERT INTO $table ($colums) VALUES($values)";
+            // echo $sql;
             $result = $this->connection->query($sql);
             if(!$result){
                 $this->connection->error;
             }else{
                 return true;
             }
+        }else{
+            echo "Table $table does not exit";
         }
     }
 
@@ -53,7 +57,7 @@ class Database {
         }
     }
 
-    public function update($table, $parameters = [], $where){
+    public function update($table, $parameters = [], $where = null){
         if($this->tableExist($table)){
            
             $fields_and_values = [];
@@ -90,12 +94,16 @@ class Database {
     }
 
     private function tableExist($table){
-        $sql = "SHOW TABLES FROM $this->db_name LIKE $table";
+        $sql = "SHOW TABLES FROM $this->db_name LIKE '$table'";
         $result = $this->connection->query($sql);
-        if($result->num_rows == 1){
-            return true;
+        if(!$result){
+            $this->connection->error;
         }else{
-            return false;
+            if($result->num_rows == 1){
+                return true;
+            }else{
+                return false;
+            }
         }
     }
 

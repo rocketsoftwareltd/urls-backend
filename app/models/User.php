@@ -24,7 +24,7 @@ class User extends Database{
             if($result->num_rows > 0){
                 Database::redirect("../../registration.php?error=duplicate&email=$user_email");
             }else{
-                $hashed_password = password_hash(PASSWORD_DEFAULT, $_POST['password']);
+                $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
                 $parameters = [
                     "email"      => $_SESSION["email"],
                     "password"   => $hashed_password,
