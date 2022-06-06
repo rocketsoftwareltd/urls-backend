@@ -1,16 +1,16 @@
 <?php
 
 class Database {
-    private $host = "localhost";
+    // private $host = 
     private $username = "root";
     private $password = "";
-    private $db_name = "url_shortener";
+    private $db_name = "urls";
     private $connection;
 
 
     function __construct()
     {
-        $this->connection = new mysqli($this->host, $this->username, $this->password, $this->db_name);
+        $this->connection = new mysqli($_SERVER["SERVER_NAME"], $this->username, $this->password, $this->db_name);
         if(!$this->connection){
             echo "Error in Database connection";
         }

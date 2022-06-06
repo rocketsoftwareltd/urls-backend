@@ -1,24 +1,24 @@
 <?php
-    require_once "app/config/config.php";
-    require_once "app/config/Database.php";
+    // require_once "app/config/config.php";
+    // require_once "app/config/Database.php";
     require "app/models/Admin.php";
     
-    $parameters = [
-        "first_name" => "Jethro",
-        "last_name"  => "Bitrus",
-        "email"      => "lopwusjethro@gmail.com",
-        "password"   => password_hash("1234", PASSWORD_DEFAULT),
-        "group"      => 1
-    ];
+    // $parameters = [
+    //     "first_name" => "Jethro",
+    //     "last_name"  => "Bitrus",
+    //     "email"      => "lopwusjethro@gmail.com",
+    //     "password"   => password_hash("1234", PASSWORD_DEFAULT),
+    //     "group"      => 1
+    // ];
 
-    $db = new Database;
-    $response = $db->insert('users',  $parameters);
-    if(!$response){
-        echo $response;
-    }else{
-        $db->redirect("dashboard.php?registration=success");
-        exit;
-    }
+    // $db = new Database;
+    // $response = $db->insert('users',  $parameters);
+    // if(!$response){
+    //     echo $response;
+    // }else{
+    //     $db->redirect("dashboard.php?registration=success");
+    //     exit;
+    // }
 
 // require_once "app/config/Db.php";
 

@@ -1,6 +1,6 @@
 <?php
-// require_once realpath(__DIR__.'/../app/config/config.php');
-require_once "../app/config/Database.php";
+include (dirname(dirname(__FILE__)). "/config/config.php");
+include (dirname(dirname(__FILE__)). "/config/Database.php");
 
 class Admin extends Database{
     private $table = "admin";
