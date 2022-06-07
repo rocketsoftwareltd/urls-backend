@@ -81,13 +81,13 @@ class Admin extends Database{
     }
 
     public function logout(){
-        if(isset($_SESSION["isLoggedIn"])){
-            if($_SESSION["isLoggedIn"] == true){
-                $_SESSION["isLoggedIn"] = false;
+        if(isset($_SESSION["adminIsLoggedIn"])){
+            if($_SESSION["adminIsLoggedIn"] == true){
+                $_SESSION["adminIsLoggedIn"] = false;
                 session_destroy();
-                $this->redirect(BASE_URL."/login.php?logout=success");
+                $this->redirect(BASE_URL."/admin/login.php?logout=success");
             }else{
-                $this->redirect(BASE_URL."/index.php");
+                $this->redirect(BASE_URL."/admin/index.php");
             }
         }
     }
