@@ -4,7 +4,7 @@ class Database {
     // private $host = 
     private $username = "root";
     private $password = "";
-    private $db_name = "urls";
+    private $db_name = "url_shortener";
     private $connection;
 
 
@@ -41,13 +41,14 @@ class Database {
         if($this->tableExist($table)){
             $sql = "SELECT $rows FROM $table";
             if($where != null){
-                $sql .= "WHERE $where";
+                $sql .= " WHERE $where";
             }
 
             if($order_by != null){
                 $sql .= "WHERE $order_by";
             }
 
+    
             $result = $this->connection->query($sql);
             if(!$result){
                 $this->connection->error;
