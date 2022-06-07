@@ -1,14 +1,39 @@
 <?php 
-  require "../app/config/Database.php";
   require "../app/models/Admin.php";
-  require "../app/models/Link.php";
-  // require "../app/models/Link.php";
+
 
   if(isset($_POST["submit"])){
     $admin = new Admin;
     $admin->login($_POST["adminID"], $_POST["password"]);
   }
+
+  $incorrect_password = $incorrect_uid = "";
+
+  if(isset($_GET["login"]) && $_GET["login"] == "fail"){
+    
+      switch ($_GET["for"]) {
+        case 'userid':
+          $incorrect_uid = '<div class="alert alert-danger" role="alert">
+                              <strong>Inccorrect User ID</strong>
+                          </div>';
+          break;
+
+
+        case 'password':
+          $incorrect_password = '<div class="alert alert-danger" role="alert">
+                                  <strong>Inccorrect Password</strong>
+                                </div>';
+          break;
+        
+        default:
+          header("Location: login.php");
+          break;
+      }
+    
+  }
+  
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,6 +62,8 @@
           <div class="row flex-grow">
             <div class="col-lg-4 mx-auto">
               <div class="auth-form-light text-left p-5">
+                <?=$incorrect_password ?>
+                <?=$incorrect_uid ?>
                 <div class="brand-logo">
                   <img src="assets/images/logo.svg">
                 </div>

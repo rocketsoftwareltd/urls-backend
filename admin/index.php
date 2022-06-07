@@ -1,8 +1,19 @@
 <?php 
-session_start();
-if(!isset($_SESSION["adminIsLoggedIn"])){
-    header("Location: login.php");
-}
+  session_start();
+  if(!isset($_SESSION["adminIsLoggedIn"])){
+      header("Location: login.php");
+  }
+
+  $login_success = "";
+
+
+  if(isset($_GET["login"])){
+    if($_GET["login"] == "success"){
+      $login_success = '<div class="alert alert-success" role="alert">
+                        <strong>Login successful</strong>
+                      </div>';
+    }
+  }
 
 ?>
 
@@ -293,8 +304,10 @@ if(!isset($_SESSION["adminIsLoggedIn"])){
           </ul>
         </nav>
         <!-- partial -->
+        
         <div class="main-panel">
           <div class="content-wrapper">
+          <?=$login_success ?>
             <div class="page-header">
               <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
