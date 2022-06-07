@@ -46,14 +46,14 @@ class Admin extends Database{
     // }
 
     public function login($adminID, $password){
-        $result = Database::select($this->table,  "*", "email=$adminID OR username=$adminID");
+        $result = Database::select($this->table,  "*", "email='$adminID' OR username='$adminID'");
         if($result->num_rows < 1){
-            return "User '$adminID' does not exist";
+            Database::redirect("login.php?login=fail&for=userid");
         }else{
             $row = $result->fetch_assoc();
             $password_verified =  password_verify($password, $row["password"]);
             if(!$password_verified){
-                return "Incorrect Password";
+                Database::redirect("login.php?login=fail&for=password");
             }else{
                 // create sessions
                 session_start();
@@ -61,7 +61,7 @@ class Admin extends Database{
                 $_SESSION["admin_id"] = $adminID;
                 $_SESSION["adminIsLoggedIn"] = true;
 
-                $duration = time(60 * 60 * 24 * 365);
+                $duration = time() + (60 * 60 * 24 * 365);
                 setcookie("admin_id",  $adminID, $duration);
                 setcookie("password", $row["password"], $duration);
 
