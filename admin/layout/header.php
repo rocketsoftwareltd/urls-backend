@@ -1,22 +1,23 @@
 <?php 
     include (dirname(dirname(dirname(__FILE__))). "/app/config/config.php");
 
-  session_start();
-  if(!isset($_SESSION["adminIsLoggedIn"])){
-      header("Location: login.php");
-  }
-
-  $login_success = "";
-
-
-  if(isset($_GET["login"])){
-    if($_GET["login"] == "success"){
-      $login_success = '<div class="alert alert-success" role="alert">
-                        <strong>Login successful</strong>
-                      </div>';
+    session_start();
+    if(!isset($_SESSION["adminIsLoggedIn"])){
+        header("Location: login.php");
     }
-  }
 
+    $login_success = "";
+
+
+    if(isset($_GET["login"])){
+        if($_GET["login"] == "success"){
+        $login_success = '<div class="alert alert-success" role="alert">
+                            <strong>Login successful</strong>
+                        </div>';
+        }
+    }
+
+   
 ?>
 
 
@@ -26,7 +27,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Urlshort Admin</title>
+    <title>Admin</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
@@ -95,7 +96,7 @@
                 <!-- <a class="dropdown-item" href="#">
                   <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a> -->
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="logout.php?action=true">
                   <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
               </div>
             </li>
