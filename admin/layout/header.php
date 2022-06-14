@@ -1,5 +1,6 @@
 <?php 
-    include (dirname(dirname(dirname(__FILE__))). "/app/config/config.php");
+    // include (dirname(dirname(dirname(__FILE__))). "/app/config/config.php");
+    include (dirname(dirname(dirname(__FILE__))). "/app/models/Admin.php");
 
     session_start();
     if(!isset($_SESSION["adminIsLoggedIn"])){

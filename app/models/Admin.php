@@ -4,6 +4,8 @@ include (dirname(dirname(__FILE__)). "/config/Database.php");
 
 class Admin extends Database{
     private $table = "admin";
+    private $tbl_users = "users";
+    private $tbl_links = "links";
     // private $parameters;
     public $isset = null;
 
@@ -86,6 +88,22 @@ class Admin extends Database{
     
         $this->redirect(BASE_URL."/admin/login.php?logout=success");
 
+    }
+
+    public function getUsers(){
+        $result = Database::select($this->tbl_users);
+        return $result;
+    }
+
+
+    public function get_num_user_link($id){
+        $result = Database::select($this->tbl_links, "", " user_id=$id");
+        if(!$result){
+            return 0;
+        }else{
+            return $result->num_rows;
+        }
+        
     }
 
 }
